@@ -1,21 +1,16 @@
-// https://leetcode.com/problems/find-the-number-of-good-pairs-ii
+// https://leetcode.com/problems/string-compression-iii
 class Solution {
 public:
-    long long numberOfPairs(vector<int>& nums1, vector<int>& nums2, int k) {
-        long long goodPairs = 0;
-        unordered_map<int, int> frequency;
-        for (auto& n : nums2) frequency[n * k]++;
-        for (auto& num1 : nums1) {
-            if ((num1 % k) == 0)
-            {
-                for (int i = 1; i * i <= num1; i++)
-                    if ((num1 % i) == 0) {
-                        goodPairs += frequency[i];
-                        if (i != num1 / i)
-                            goodPairs += frequency[num1 / i];
-                    }
-            }
+    string compressedString(string word) {
+        string comp;
+        auto first = word.begin(), last = word.begin();
+        while (first != word.end()) {
+            while (last != word.end() && *first == *last && last - first < 9)
+                last++;
+            comp.push_back('0' + (last - first));
+            comp.push_back(*first);
+            first = last;
         }
-        return goodPairs;
+        return comp;
     }
 };
