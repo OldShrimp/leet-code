@@ -1,16 +1,11 @@
-// https://leetcode.com/problems/string-compression-iii
+// https://leetcode.com/problems/find-the-number-of-good-pairs-i
 class Solution {
 public:
-    string compressedString(string word) {
-        string comp;
-        auto first = word.begin(), last = word.begin();
-        while (first != word.end()) {
-            while (last != word.end() && *first == *last && last - first < 9)
-                last++;
-            comp.push_back('0' + (last - first));
-            comp.push_back(*first);
-            first = last;
-        }
-        return comp;
+    int numberOfPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+        int goodPairs = 0;
+        for (auto& num1 : nums1)
+            for (auto& num2 : nums2)
+                goodPairs += static_cast<int>((num1 % (num2 * k)) == 0);
+        return goodPairs;
     }
 };
