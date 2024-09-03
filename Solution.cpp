@@ -1,14 +1,15 @@
 class Solution {
 public:
-    int lengthOfLongestSubstring(string s) {
-        int longest_substring = 0;
-        for (auto i = s.begin(); i != s.end(); i++) {
-            auto subStringStart = i, subStringEnd = i;
-            while (subStringEnd != s.end() && find(subStringStart, subStringEnd, *(subStringEnd)) == subStringEnd) {
-                subStringEnd++;
-            }
-            longest_substring = max(longest_substring, static_cast<int>(distance(subStringStart, subStringEnd)));
-        }
-        return longest_substring;
+    int xorAllNums(vector<int>& nums1, vector<int>& nums2) {
+        int XOR_ALL = 0;
+
+        if (nums2.size() % 2 != 0)
+            for (auto& n1 : nums1)
+                XOR_ALL ^= n1;
+        if (nums1.size() % 2 != 0)
+            for (auto& n2 : nums2)
+                XOR_ALL ^= n2;
+
+        return XOR_ALL;
     }
 };
