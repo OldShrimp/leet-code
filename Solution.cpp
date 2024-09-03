@@ -1,15 +1,13 @@
-// https://leetcode.com/problems/two-sum
+// https://leetcode.com/problems/reverse-string
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        vector<int> result;
-        for (int i = 0; i < nums.size(); i++)
-            for (int j = i + 1; j < nums.size(); j++)
-                if (nums[i] + nums[j] == target) {
-                    result.push_back(i);
-                    result.push_back(j);
-                    return result;
-                }
-        return result;
+    void reverseString(vector<char>& s) {
+        auto front_iter = s.begin();
+        auto back_iter = s.end() - 1;
+        while (front_iter < back_iter) {
+            swap(*front_iter, *back_iter);
+            front_iter++;
+            back_iter--;
+        }
     }
 };
