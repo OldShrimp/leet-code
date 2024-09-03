@@ -1,25 +1,28 @@
-// https://leetcode.com/problems/get-maximum-in-generated-array/
+// https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
 public:
-    int getMaximumGenerated(int n) {
-        if (n < 2)
-            return n;
 
-        int largest = 1;
+    TreeNode* prev = nullptr;
+    void flatten(TreeNode* root)
+    {
+        if (root != nullptr) {
+            flatten(root->right);
+            flatten(root->left);
 
-        vector<int> vec;
-        vec.reserve(n + 1);
-        vec.push_back(0);
-        vec.push_back(1);
-        for (int i = 2; i <= n; i++) {
-            if (i % 2 == 0) {
-                vec.push_back(vec[i / 2]);
-            }
-            else {
-                vec.push_back(vec[(i - 1) / 2] + vec[(i - 1) / 2 + 1]);
-            }
-            largest = max(largest, vec[i]);
+            root->right = prev;
+            root->left = nullptr;
+            prev = root;
         }
-        return largest;
     }
 };
