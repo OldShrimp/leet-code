@@ -1,34 +1,26 @@
-// https://leetcode.com/problems/zigzag-conversion/
+// https://leetcode.com/problems/reverse-integer/
+
 class Solution {
 public:
-    string convert(string s, int numRows) {
-        if (numRows == 0)
-            return "";
-        if (numRows == 1 || numRows >= s.length())
-            return s;
-        vector<string> rows(numRows, string(""));
-        string spaced_str, spaces(numRows - 2, ' ');
-        if (numRows == 2) {
-            spaced_str = s;
+    int reverse(int x) {
+        string strx = to_string(x);
+        auto l = strx.begin(), r = strx.end() - 1;
+        if (*l == '-')
+            l++;
+        while (l < r) {
+            swap(*l, *r);
+            l++;
+            r--;
         }
-        else {
-            for (int i = 0; i < s.length(); i++) {
-                spaced_str += s[i];
-                if (i % (2 * numRows - 2) >= numRows - 1) {
-                    spaced_str += spaces;
-                }
-            }
+        l = strx.begin();
+        if (*l == '-')
+            l++;
+        while (*l == '0') {
+            strx.erase(l);
         }
-
-        for (int i = 0; i < spaced_str.length(); i++) {
-            rows[i % numRows] += spaced_str[i];
-        }
-        string converted = "";
-        for (auto& str : rows) {
-            cout << str << endl;
-            str.erase(remove(str.begin(), str.end(), ' '), str.end());
-            converted += str;
-        }
-        return converted;
+        int answer = atoi(strx.c_str());
+        if (strx.compare(to_string(answer)) != 0)
+            return 0;
+        return answer;
     }
 };
