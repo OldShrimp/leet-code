@@ -4,7 +4,7 @@ public:
     string convert(string s, int numRows) {
         if (numRows == 0)
             return "";
-        if (numRows == 1)
+        if (numRows == 1 || numRows >= s.length())
             return s;
         vector<string> rows(numRows, string(""));
         string spaced_str, spaces(numRows - 2, ' ');
